@@ -1,33 +1,33 @@
-'use client'
+﻿"use client"
 
-import { useState } from 'react'
-import Image from 'next/image'
-import { Play } from 'lucide-react'
+import { useState } from "react"
+import { Play } from "lucide-react"
 
 type VideoCardProps = {
   thumbnail: string
   videoUrl: string
   title: string
-  aspect?: 'video' | 'portrait' // 'video' = 16:9, 'portrait' = 9:16
+  aspect?: "video" | "portrait"
   sizes?: string
   priority?: boolean
 }
 
-// Turns a normal YouTube/Vimeo link into an embeddable URL.
-// Returns null if it's not a recognized embed link (e.g. a direct .mp4 file).
-function getEmbedUrl(url: string): string | null {
-  const youtubeMatch = url.match(
+function getYouTubeId(url: string): string | null {
+  const match = url.match(
     /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/shorts\/)([\w-]{11})/,
   )
-  if (youtubeMatch) {
-    return `https://www.youtube.com/embed/${youtubeMatch[1]}?autoplay=1`
-  }
+  return match ? match[1] : null
+}
 
+function getEmbedUrl(url: string): string | null {
+  const youtubeId = getYouTubeId(url)
+  if (youtubeId) {
+    return "https://www.youtube.com/embed/" + youtubeId + "?autoplay=1"
+  }
   const vimeoMatch = url.match(/vimeo\.com\/(\d+)/)
   if (vimeoMatch) {
-    return `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1`
+    return "https://player.vimeo.com/video/" + vimeoMatch[1] + "?autoplay=1"
   }
-
   return null
 }
 
@@ -35,17 +35,21 @@ export function VideoCard({
   thumbnail,
   videoUrl,
   title,
-  aspect = 'video',
-  sizes = '100vw',
+  aspect = "video",
+  sizes = "100vw",
   priority = false,
 }: VideoCardProps) {
   const [playing, setPlaying] = useState(false)
   const embedUrl = getEmbedUrl(videoUrl)
-  const aspectClass = aspect === 'portrait' ? 'aspect-[9/16]' : 'aspect-video'
+  const youtubeId = getYouTubeId(videoUrl)
+  const displayThumbnail = youtubeId
+    ? "https://img.youtube.com/vi/" + youtubeId + "/hqdefault.jpg"
+    : thumbnail || "/placeholder.svg"
+  const aspectClass = aspect === "portrait" ? "aspect-[9/16]" : "aspect-video"
 
   if (playing) {
     return (
-      <div className={`relative ${aspectClass} overflow-hidden rounded-xl border border-border bg-black`}>
+      <div className={"relative " + aspectClass + " overflow-hidden rounded-xl border border-border bg-black"}>
         {embedUrl ? (
           <iframe
             src={embedUrl}
@@ -70,16 +74,13 @@ export function VideoCard({
     <button
       type="button"
       onClick={() => setPlaying(true)}
-      aria-label={`Play ${title}`}
-      className={`group relative ${aspectClass} w-full overflow-hidden rounded-xl border border-border bg-card`}
+      aria-label={"Play " + title}
+      className={"group relative " + aspectClass + " w-full overflow-hidden rounded-xl border border-border bg-card"}
     >
-      <Image
-        src={thumbnail || '/placeholder.svg'}
+      <img
+        src={displayThumbnail}
         alt={title}
-        fill
-        sizes={sizes}
-        priority={priority}
-        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        className="absolute inset-0 size-full object-cover transition-transform duration-500 group-hover:scale-105"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
       <div className="absolute inset-0 flex items-center justify-center bg-background/10 opacity-0 transition-opacity duration-300 group-hover:opacity-100">

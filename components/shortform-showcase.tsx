@@ -1,21 +1,9 @@
-import { HoverVideoCard } from './hover-video-card'
+﻿import { VideoCard } from "./video-card"
 
 const clips = [
-  {
-    video: '/shortform-1.mp4',
-    title: 'Founder Story — Ep. 14',
-    meta: '4.2M views · TikTok',
-  },
-  {
-    video: '/shortform-2.mp4',
-    title: 'Rules I Live By',
-    meta: '1.8M views · Reels',
-  },
-  {
-    video: '/shortform-3.mp4',
-    title: 'Podcast Highlight',
-    meta: '3.1M views · Shorts',
-  },
+  { src: "/shortform-1.png", video: "https://youtube.com/shorts/u5GR8y8nmKE", title: "", meta: "" },
+  { src: "/shortform-2.png", video: "https://youtube.com/shorts/oeANkfu9920", title: "", meta: "" },
+  { src: "/shortform-3.png", video: "https://youtube.com/shorts/p4PqDTIz8X8", title: "", meta: "" },
 ]
 
 export function ShortformShowcase() {
@@ -25,7 +13,7 @@ export function ShortformShowcase() {
         <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="font-mono text-sm uppercase tracking-[0.2em] text-accent">
-              01 — Short-form
+              01 - Short-form
             </p>
             <h2 className="mt-4 text-balance font-mono text-4xl font-bold tracking-tight text-foreground sm:text-6xl">
               Built for the vertical feed.
@@ -38,15 +26,15 @@ export function ShortformShowcase() {
         </div>
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {clips.map((clip) => (
-            <article key={clip.title} className="group">
-              <HoverVideoCard videoUrl={clip.video} title={clip.title} aspect="portrait" />
-              <div className="mt-3">
-                <h3 className="font-mono text-lg font-semibold text-foreground">
-                  {clip.title}
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">{clip.meta}</p>
-              </div>
+          {clips.map((clip, i) => (
+            <article key={i} className="group relative">
+              <VideoCard
+                thumbnail={clip.src}
+                videoUrl={clip.video}
+                title={clip.title}
+                aspect="portrait"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
             </article>
           ))}
         </div>
