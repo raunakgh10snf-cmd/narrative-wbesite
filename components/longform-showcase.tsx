@@ -1,21 +1,23 @@
-import Image from 'next/image'
-import { Play } from 'lucide-react'
+import { VideoCard } from './video-card'
 
 const videos = [
   {
     src: '/longform-1.png',
+    video: 'https://www.youtube.com/watch?v=REPLACE_WITH_ID', // or a direct .mp4 URL
     title: 'The Truth About Success',
     meta: '2:14 · Podcast trailer',
     views: '2.9M views',
   },
   {
     src: '/longform-2.png',
+    video: 'https://www.youtube.com/watch?v=REPLACE_WITH_ID',
     title: 'Behind The Story',
     meta: '16:40 · YouTube video',
     views: '1.1M views',
   },
   {
     src: '/longform-3.png',
+    video: 'https://www.youtube.com/watch?v=REPLACE_WITH_ID',
     title: 'Scaling Revenue Ops',
     meta: '9:52 · B2B video',
     views: '480K views',
@@ -47,20 +49,13 @@ export function LongformShowcase() {
               key={video.title}
               className={`group ${i === 0 ? 'lg:col-span-2' : ''}`}
             >
-              <div className="relative aspect-video overflow-hidden rounded-xl border border-border bg-card">
-                <Image
-                  src={video.src || '/placeholder.svg'}
-                  alt={video.title}
-                  fill
-                  sizes={i === 0 ? '100vw' : '(max-width: 1024px) 100vw, 50vw'}
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 flex items-center justify-center bg-background/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <span className="flex size-16 items-center justify-center rounded-full bg-foreground/90 text-background">
-                    <Play className="size-6 translate-x-0.5 fill-current" />
-                  </span>
-                </div>
-              </div>
+              <VideoCard
+                thumbnail={video.src}
+                videoUrl={video.video}
+                title={video.title}
+                aspect="video"
+                sizes={i === 0 ? '100vw' : '(max-width: 1024px) 100vw, 50vw'}
+              />
               <div className="mt-4 flex items-center justify-between">
                 <div>
                   <h3 className="font-mono text-xl font-semibold text-foreground">

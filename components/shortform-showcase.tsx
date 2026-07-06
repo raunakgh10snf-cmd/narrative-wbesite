@@ -1,19 +1,18 @@
-import Image from 'next/image'
-import { Play } from 'lucide-react'
+import { HoverVideoCard } from './hover-video-card'
 
 const clips = [
   {
-    src: '/shortform-1.png',
+    video: '/shortform-1.mp4',
     title: 'Founder Story — Ep. 14',
     meta: '4.2M views · TikTok',
   },
   {
-    src: '/shortform-2.png',
+    video: '/shortform-2.mp4',
     title: 'Rules I Live By',
     meta: '1.8M views · Reels',
   },
   {
-    src: '/shortform-3.png',
+    video: '/shortform-3.mp4',
     title: 'Podcast Highlight',
     meta: '3.1M views · Shorts',
   },
@@ -40,22 +39,9 @@ export function ShortformShowcase() {
 
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {clips.map((clip) => (
-            <article
-              key={clip.title}
-              className="group relative aspect-[9/16] overflow-hidden rounded-xl border border-border bg-card"
-            >
-              <Image
-                src={clip.src || '/placeholder.svg'}
-                alt={clip.title}
-                fill
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/10 to-transparent" />
-              <div className="absolute left-4 top-4 flex size-12 items-center justify-center rounded-full bg-foreground/90 text-background opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                <Play className="size-5 translate-x-0.5 fill-current" />
-              </div>
-              <div className="absolute inset-x-0 bottom-0 p-5">
+            <article key={clip.title} className="group">
+              <HoverVideoCard videoUrl={clip.video} title={clip.title} aspect="portrait" />
+              <div className="mt-3">
                 <h3 className="font-mono text-lg font-semibold text-foreground">
                   {clip.title}
                 </h3>
