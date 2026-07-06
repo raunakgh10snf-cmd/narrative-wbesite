@@ -1,27 +1,9 @@
 ﻿import { VideoCard } from "./video-card"
 
 const videos = [
-  {
-    src: "/longform-1.png",
-    video: "https://youtu.be/YeIJQKR8eqI",
-    title: "The Truth About Success",
-    meta: "2:14 - Podcast trailer",
-    views: "2.9M views",
-  },
-  {
-    src: "/longform-2.png",
-    video: "https://youtu.be/ghT9zXC3kyQ",
-    title: "Behind The Story",
-    meta: "16:40 - YouTube video",
-    views: "1.1M views",
-  },
-  {
-    src: "/longform-3.png",
-    video: "https://youtu.be/8zcnK6Lx_p4",
-    title: "Scaling Revenue Ops",
-    meta: "9:52 - B2B video",
-    views: "480K views",
-  },
+  { src: "/longform-1.png", video: "https://youtu.be/YeIJQKR8eqI", title: "" },
+  { src: "/longform-2.png", video: "https://youtu.be/ghT9zXC3kyQ", title: "" },
+  { src: "/longform-3.png", video: "https://youtu.be/8zcnK6Lx_p4", title: "" },
 ]
 
 export function LongformShowcase() {
@@ -45,7 +27,7 @@ export function LongformShowcase() {
         <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
           {videos.map((video, i) => (
             <article
-              key={video.title}
+              key={i}
               className={"group " + (i === 0 ? "lg:col-span-2" : "")}
             >
               <VideoCard
@@ -55,17 +37,6 @@ export function LongformShowcase() {
                 aspect="video"
                 sizes={i === 0 ? "100vw" : "(max-width: 1024px) 100vw, 50vw"}
               />
-              <div className="mt-4 flex items-center justify-between">
-                <div>
-                  <h3 className="font-mono text-xl font-semibold text-foreground">
-                    {video.title}
-                  </h3>
-                  <p className="mt-1 text-sm text-muted-foreground">{video.meta}</p>
-                </div>
-                <span className="shrink-0 text-sm font-medium text-muted-foreground">
-                  {video.views}
-                </span>
-              </div>
             </article>
           ))}
         </div>
