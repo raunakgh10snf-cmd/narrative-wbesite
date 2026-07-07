@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+﻿import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
 
 export function CTA() {
   return (
@@ -16,17 +16,11 @@ export function CTA() {
           become.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a
-            href="mailto:narrative@gmail.com"
-            className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-sm font-semibold text-background transition-opacity hover:opacity-90"
-          >
-            narrative@gmail.com
+          <a href="mailto:narrative.vr@gmail.com" className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3.5 text-sm font-semibold text-background transition-opacity hover:opacity-90">
+            narrative.vr@gmail.com
             <ArrowUpRight className="size-4" />
           </a>
-          <Link
-            href="/about"
-            className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
-          >
+          <Link href="/about" className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary">
             Learn about us
           </Link>
         </div>
