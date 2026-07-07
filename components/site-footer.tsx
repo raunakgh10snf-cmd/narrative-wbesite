@@ -1,22 +1,20 @@
-import Link from 'next/link'
+﻿import Link from "next/link"
 
 const groups = [
   {
-    heading: 'Sitemap',
+    heading: "Sitemap",
     links: [
-      { href: '/', label: 'Home' },
-      { href: '/#work', label: 'Work' },
-      { href: '/#services', label: 'Services' },
-      { href: '/about', label: 'About' },
+      { href: "/", label: "Home" },
+      { href: "/#work", label: "Work" },
+      { href: "/#services", label: "Services" },
+      { href: "/about", label: "About" },
     ],
   },
   {
-    heading: 'Social',
+    heading: "Social",
     links: [
-      { href: '#', label: 'Instagram' },
-      { href: '#', label: 'YouTube' },
-      { href: '#', label: 'TikTok' },
-      { href: '#', label: 'LinkedIn' },
+      { href: "https://www.instagram.com/narrative.vr", label: "Instagram" },
+      { href: "#", label: "YouTube" },
     ],
   },
 ]
@@ -45,6 +43,8 @@ export function SiteFooter() {
                   <li key={link.label}>
                     <Link
                       href={link.href}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                      rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                       className="text-sm text-foreground/90 transition-colors hover:text-accent"
                     >
                       {link.label}
@@ -55,7 +55,6 @@ export function SiteFooter() {
             </div>
           ))}
         </div>
-
         <div className="mt-14 flex flex-col gap-2 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Narrative Studio. All rights reserved.</p>
           <p className="font-mono">Visual storytelling, engineered for reach.</p>
